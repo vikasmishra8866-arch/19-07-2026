@@ -85,6 +85,6 @@ def register():
 @app.route('/')
 def home():
     if 'user_mobile' in session:
-        # Purane welcome text ki jagah premium dashboard template load hoga
         return render_template('dashboard.html')
-    return redirect(url_for('login'))
+    else:
+        return redirect(url_for('login'))
