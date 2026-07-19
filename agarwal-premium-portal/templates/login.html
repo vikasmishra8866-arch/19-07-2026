@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawan Auto - Login</title>
+    <!-- Tailwind CSS & FontAwesome Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center overflow-hidden relative">
 
+    <!-- Background Premium Glow Effect -->
+    <div class="absolute w-96 h-96 bg-purple-600/20 rounded-full blur-3xl -top-20 -left-20"></div>
+    <div class="absolute w-96 h-96 bg-blue-600/20 rounded-full blur-3xl -bottom-20 -right-20"></div>
+
+    <!-- Login Container Box -->
+    <div class="w-full max-w-md p-8 mx-4 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-2xl animate-fade-in z-10">
+        
+        <!-- Header / Logo Area -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-xl shadow-lg shadow-blue-500/20 mb-3">
+                <i class="fa-solid fa-shield-halved text-2xl text-white"></i>
+            </div>
+            <h2 class="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Pawan Auto</h2>
+            <p class="text-slate-400 text-sm mt-1">Premium Enterprise Portal Login</p>
+        </div>
+
+        <!-- Flash Messages (Server Errors) -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg flex items-center gap-2">
+                    <i class="fa-solid fa-circle-exclamation"></i> {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Login Form -->
+        <form action="/login" method="POST" class="space-y-5">
+            <!-- Mobile Number Input -->
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Mobile Number</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                    <input type="tel" name="mobile" required placeholder="Enter mobile number" 
+                           class="w-full pl-10 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl focus:outline-none focus:border-blue-500 text-slate-200 placeholder-slate-600 transition-all duration-300">
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+                    <input type="password" name="password" required placeholder="••••••••" 
+                           class="w-full pl-10 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl focus:outline-none focus:border-blue-500 text-slate-200 placeholder-slate-600 transition-all duration-300">
+                </div>
+            </div>
+
+            <!-- Login Button -->
+            <button type="submit" 
+                    class="w-full py-3 mt-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer">
+                Sign In <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+        </form>
+
+        <!-- Dynamic Link To Register Page with sliding effect -->
+        <div class="mt-6 text-center">
+            <p class="text-sm text-slate-400">
+                New user? 
+                <a href="/register" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200 group">
+                    Create an account 
+                    <i class="fa-solid fa-arrow-right-long ml-1 text-xs transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>
