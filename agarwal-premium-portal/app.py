@@ -26,11 +26,7 @@ def init_db():
 # Server start hote hi database check karega
 init_db()
 
-@app.route('/')
-def home():
-    if 'user_mobile' in session:
-        return f"<h1>Welcome to Pawan Auto Premium Dashboard, {session['user_mobile']}!</h1><br><a href='/logout'>Logout</a>"
-    return redirect(url_for('login'))
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
