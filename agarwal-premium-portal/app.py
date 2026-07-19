@@ -86,12 +86,9 @@ def register():
 
     return render_template('register.html')
 
-@app.route('/logout')
-def logout():
-    session.pop('user_mobile', None)
+@app.route('/')
+def home():
+    if 'user_mobile' in session:
+        # Purane welcome text ki jagah premium dashboard template load hoga
+        return render_template('dashboard.html')
     return redirect(url_for('login'))
-
-if __name__ == '__main__':
-    # Cloud (Render) par chalane ke liye generic port logic
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
