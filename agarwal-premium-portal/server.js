@@ -32,14 +32,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Static file routing maps
-app.use(express.static(path.join(__dirname, 'public')));
+// Static file routing maps - Fully explicit fail-safe resolution
+const PUBLIC_DIR = path.resolve(__dirname, 'public');
+app.use(express.static(PUBLIC_DIR));
 
 // Authentication Middleware Router Guard
 const requireAuth = (req, res, next) => {
     const token = req.cookies.auth_token;
     if (!token) {
-        return res.status(401).json({ authenticated: false, message: 'Unauthorized session termination state.' });
+        return res.status(401).redirect('/');
     }
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
@@ -47,15 +48,15 @@ const requireAuth = (req, res, next) => {
         next();
     } catch (err) {
         res.clearCookie('auth_token');
-        return res.status(401).json({ authenticated: false, message: 'Invalid token mapping.' });
+        return res.status(401).redirect('/');
     }
 };
 
 /* ==========================================
-   AUTHENTICATION API ROUTE CHANNELS
+   PAGE NAVIGATION DIRECTIVES & ROUTING
    ========================================== */
 
-// Page Navigation Directives
+// Base Landing Route
 app.get('/', (req, res) => {
     const token = req.cookies.auth_token;
     if (token) {
@@ -66,26 +67,20 @@ app.get('/', (req, res) => {
             res.clearCookie('auth_token');
         }
     }
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    res.sendFile(path.join(PUBLIC_DIR, 'login.html'));
 });
 
-app.get('/dashboard.html', (req, res) => {
-    const token = req.cookies.auth_token;
-    if (!token) return res.redirect('/login.html');
-    try {
-        jwt.verify(token, JWT_SECRET);
-        res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
-    } catch (e) {
-        res.clearCookie('auth_token');
-        res.redirect('/login.html');
-    }
+// Protected Dashboard Handler
+app.get('/dashboard.html', requireAuth, (req, res) => {
+    res.sendFile(path.join(PUBLIC_DIR, 'dashboard.html'));
 });
 
+// Catch-all route to prevent standard 404 navigation loop
 app.get('/login.html', (req, res) => {
     res.redirect('/');
 });
 
-// Verification Gateway Check
+// Verification Gateway Check API
 app.get('/api/verify', (req, res) => {
     const token = req.cookies.auth_token;
     if (!token) return res.json({ authenticated: false });
@@ -96,6 +91,10 @@ app.get('/api/verify', (req, res) => {
         return res.json({ authenticated: false });
     }
 });
+
+/* ==========================================
+   AUTHENTICATION API ROUTE CHANNELS
+   ========================================== */
 
 // Strict Account Registration Pipeline
 app.post('/api/register', async (req, res) => {
@@ -150,7 +149,7 @@ app.post('/api/login', async (req, res) => {
         
         res.cookie('auth_token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: true, // Required for secure environment context on Render
             sameSite: 'strict',
             maxAge: 365 * 24 * 60 * 60 * 1000 // 1 Year session lifecycle retention
         });
@@ -161,7 +160,13 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// Session Termination Endpoint
+// Fail-safe GET /logout Triggered by Dashboard Terminate Button
+app.get('/logout', (req, res) => {
+    res.clearCookie('auth_token');
+    return res.redirect('/');
+});
+
+// API Session Termination Endpoint (For AJAX fallback if needed)
 app.post('/api/logout', (req, res) => {
     res.clearCookie('auth_token');
     return res.status(200).json({ success: true, message: 'Session killed.' });
