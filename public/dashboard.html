@@ -3,64 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agarwal Interface - Dashboard Engine</title>
+    <title>Agarwal Interface - Premium Core v2</title>
+    <!-- Main Style Matrix Sheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome Font Engine for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dashboard-body flex flex-col h-full overflow-hidden select-none">
 
-    <!-- MASTER BAR ROUTING HEADER -->
+    <!-- MASTER TOP BAR HEADER -->
     <header class="master-header glass-panel">
-        <div class="header-branding">
-            <div class="brand-hexagon bg-gradient-amber">
-                <i class="fa-solid fa-shield-halved text-slate-950 text-xl"></i>
+        <div class="header-left-zone">
+            <!-- Mobile Menu Toggle Trigger Hamburger -->
+            <button id="mobile-menu-trigger" class="mobile-toggle-btn" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+            <div class="header-branding">
+                <div class="brand-hexagon bg-gradient-amber">
+                    <i class="fa-solid fa-shield-halved text-slate-950 text-xl"></i>
+                </div>
+                <h1 class="brand-hindi">अग्रवाल इंटरफेस</h1>
             </div>
-            <h1 class="brand-hindi">अग्रवाल इंटरफेस</h1>
         </div>
 
         <!-- System Digital Clock Widget Matrix -->
         <div class="clock-widget-container">
             <div class="clock-display-row">
                 <i class="fa-regular fa-clock clock-pulse-icon"></i>
-                <span id="digital-clock">Synchronizing Logs...</span>
+                <span id="digital-clock">Syncing Core Engine...</span>
             </div>
             <div class="power-signature">Power Auto</div>
         </div>
     </header>
 
-    <!-- CONTAINER SPACE WORKSPACE -->
-    <div class="dashboard-workspace flex flex-1 overflow-hidden">
+    <!-- MAIN INTERFACE WORKSPACE CONTAINER -->
+    <div class="dashboard-workspace flex flex-1 overflow-hidden relative">
         
-        <!-- SIDEBAR CONTROLS -->
-        <aside class="sidebar-aside glass-panel">
+        <!-- BACKDROP OVERLAY FOR MOBILE SIDEBAR CLOSURE -->
+        <div id="sidebar-overlay" class="sidebar-overlay-mask"></div>
+
+        <!-- DYNAMIC FLOATING SIDEBAR ASIDE PANEL -->
+        <aside id="dynamic-sidebar" class="sidebar-aside glass-panel">
             <div class="sidebar-top-group">
-                <p class="sidebar-section-title">Active Environment</p>
-                <nav class="sidebar-nav">
-                    <button class="nav-item active">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <span>System Controller</span>
-                    </button>
-                </nav>
+                <p class="sidebar-section-title">Operational Navigation</p>
+                <!-- 🧠 THIS NAVIGATION GRID WILL BE AUTOMATICALLY POPULATED BY JAVASCRIPT ENGINE -->
+                <nav id="sidebar-navigation-node" class="sidebar-nav"></nav>
             </div>
 
-            <!-- SECURITY TERMINATE SESSION CONTROLLER BLOCK -->
+            <!-- PERMANENT FOOTER BLOCK CONTROLLER INSIDE SIDEBAR -->
             <div class="sidebar-bottom-group">
-                <a href="/logout" class="btn-terminate-session" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;">
-                    <i class="fa-solid fa-power-off"></i>
-                    <span>Terminate Session</span>
-                </a>
+                <div class="system-status-pill">
+                    <span class="pulse-dot"></span>
+                    <span class="status-text">Engine Secure</span>
+                </div>
             </div>
         </aside>
 
-        <!-- MAIN MAIN HUB INTERFACE -->
-        <main class="main-hub-content flex-1 overflow-y-auto">
-            <div class="welcome-banner glass-panel">
-                <h2>Secure Operational Database Active</h2>
-                <p>System runtime verification authenticated indefinitely. Core metrics tracking running optimally.</p>
+        <!-- DYNAMIC MAIN INTERFACE CONTENT HOUSING HUB -->
+        <main class="main-hub-content flex-1 overflow-y-auto relative">
+            <div id="module-content-target" class="content-viewport-wrapper">
+                <!-- 🧠 DYNAMIC ASYNC MODULE PAGES (HTML SNIPPETS) WILL LOAD HERE ON THE FLY -->
+                <div class="content-loading-shimmer">
+                    <i class="fa-solid fa-circle-notch fa-spin text-4xl text-amber-500"></i>
+                    <p class="text-slate-400 mt-4 text-sm tracking-widest uppercase">Initializing Interface Architecture...</p>
+                </div>
             </div>
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Core Loader Scripts Initialization Execution Matrix -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
