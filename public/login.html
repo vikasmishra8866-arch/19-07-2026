@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agarwal Enterprise - Secure Gateway</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-body flex items-center justify-center min-h-full overflow-y-auto p-4 select-none">
 
+    <!-- Toast Component Notifications -->
+    <div id="toast-notification" class="toast hidden">
+        <i id="toast-icon" class="fa-solid mr-2"></i>
+        <span id="toast-text">System Status Update</span>
+    </div>
+
+    <!-- Container Perspective for Fluid 3D Flip Card Animation -->
+    <div class="card-container">
+        <div class="card-flipper" id="flipper">
+
+            <!-- FRONT CARD FACE: LOGIN FORM -->
+            <div class="card-face card-front glass-panel">
+                <div class="auth-header">
+                    <div class="brand-shield">
+                        <i class="fa-solid fa-shield-halved text-amber-400 text-2xl"></i>
+                    </div>
+                    <h2>अग्रवाल इंटरफेस</h2>
+                    <p>Enter administrative operational parameters</p>
+                </div>
+                
+                <form id="login-form" autocomplete="off" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <label for="login-mobile">Mobile Number</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="text" id="login-mobile" placeholder="Enter registered number" required pattern="[0-9]{10}">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="login-password">System Password</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="login-password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="login-submit-btn">
+                        <span>Access Dashboard</span> <i class="fa-solid fa-arrow-right-to-bracket ml-2"></i>
+                    </button>
+                </form>
+
+                <div class="auth-footer-toggle">
+                    <p>New terminal node requirement? <button type="button" onclick="toggleAuthForm(true)">Switch to Register</button></p>
+                </div>
+            </div>
+
+            <!-- BACK CARD FACE: REGISTRATION FORM -->
+            <div class="card-face card-back glass-panel">
+                <div class="auth-header">
+                    <div class="brand-shield">
+                        <i class="fa-solid fa-key text-amber-400 text-2xl"></i>
+                    </div>
+                    <h2>अग्रवाल इंटरफेस</h2>
+                    <p>Initialize security cluster configuration</p>
+                </div>
+                
+                <form id="register-form" autocomplete="off" onsubmit="handleRegister(event)">
+                    <div class="input-group">
+                        <label for="reg-mobile">Mobile Number</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="text" id="reg-mobile" placeholder="10 Digit Terminal ID" required pattern="[0-9]{10}">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="reg-password">System Password</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="reg-password" placeholder="••••••••" required minlength="6">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-confirm">Confirm Password</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock-open"></i>
+                            <input type="password" id="reg-confirm" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group secret-gate">
+                        <label for="reg-secret">Enter Secret Registration Key</label>
+                        <div class="input-field neon-gate">
+                            <i class="fa-solid fa-vault text-amber-400"></i>
+                            <input type="text" id="reg-secret" placeholder="Secret Key Required" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary accent-gold" id="register-submit-btn">
+                        <span>Sync System Node</span> <i class="fa-solid fa-circle-check ml-2"></i>
+                    </button>
+                </form>
+
+                <div class="auth-footer-toggle">
+                    <p>Existing credential metrics? <button type="button" onclick="toggleAuthForm(false)">Switch to Login</button></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
