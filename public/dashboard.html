@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agarwal Interface - Dashboard Engine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body flex flex-col h-full overflow-hidden select-none">
 
+    <!-- MASTER BAR ROUTING HEADER -->
+    <header class="master-header glass-panel">
+        <div class="header-branding">
+            <div class="brand-hexagon bg-gradient-amber">
+                <i class="fa-solid fa-shield-halved text-slate-950 text-xl"></i>
+            </div>
+            <h1 class="brand-hindi">अग्रवाल इंटरफेस</h1>
+        </div>
+
+        <!-- System Digital Clock Widget Matrix -->
+        <div class="clock-widget-container">
+            <div class="clock-display-row">
+                <i class="fa-regular fa-clock clock-pulse-icon"></i>
+                <span id="digital-clock">Synchronizing Logs...</span>
+            </div>
+            <div class="power-signature">Power Auto</div>
+        </div>
+    </header>
+
+    <!-- CONTAINER SPACE WORKSPACE -->
+    <div class="dashboard-workspace flex flex-1 overflow-hidden">
+        
+        <!-- SIDEBAR CONTROLS -->
+        <aside class="sidebar-aside glass-panel">
+            <div class="sidebar-top-group">
+                <p class="sidebar-section-title">Active Environment</p>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>System Controller</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- SECURITY TERMINATE SESSION CONTROLLER BLOCK -->
+            <div class="sidebar-bottom-group">
+                <button class="btn-terminate-session" onclick="terminateUserSession()">
+                    <i class="fa-solid fa-power-off"></i>
+                    <span>Terminate Session</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN MAIN HUB INTERFACE -->
+        <main class="main-hub-content flex-1 overflow-y-auto">
+            <div class="welcome-banner glass-panel">
+                <h2>Secure Operational Database Active</h2>
+                <p>System runtime verification authenticated indefinitely. Core metrics tracking running optimally.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
